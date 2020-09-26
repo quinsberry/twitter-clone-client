@@ -14,7 +14,7 @@ import {
 
 import signInStyles from './styles'
 
-const SignIn = () => {
+export const SignIn: React.FC = (): React.ReactElement => {
   const classes = signInStyles()
 
   const [visibleModal, setVisibleModal] = useState<'signUp' | 'logIn'>()
@@ -162,5 +162,3 @@ const SignIn = () => {
     </div>
   )
 }
-
-export default SignIn
