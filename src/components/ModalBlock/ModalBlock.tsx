@@ -14,7 +14,7 @@ interface IProps {
   onClose: () => void
 }
 
-const ModalBlock: React.FC<IProps> = ({
+export const ModalBlock: React.FC<IProps> = ({
   title,
   classes,
   children,
@@ -35,5 +35,3 @@ const ModalBlock: React.FC<IProps> = ({
     </Dialog>
   )
 }
-
-export default ModalBlock

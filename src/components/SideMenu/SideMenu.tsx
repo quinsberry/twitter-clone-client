@@ -1,7 +1,7 @@
 import React from 'react'
 import cn from 'classnames'
 
-import { IconButton, Typography, Button } from '@material-ui/core'
+import { IconButton, Typography, Button, Hidden } from '@material-ui/core'
 import {
   Twitter as TwitterIcon,
   Search as SearchIcon,
@@ -10,6 +10,7 @@ import {
   NotificationsNoneOutlined as NotificationsIcon,
   BookmarkBorder as BookmarkIcon,
   ListAltOutlined as ListIcon,
+  CreateOutlined as CreateIcon,
 } from '@material-ui/icons'
 
 import { useHomeStyles } from 'pages/Home/styles'
@@ -18,7 +19,7 @@ interface SideMenuProps {
   classes: ReturnType<typeof useHomeStyles>
 }
 
-const SideMenu: React.FC<SideMenuProps> = ({ classes }): React.ReactElement => {
+export const SideMenu: React.FC<SideMenuProps> = ({ classes }): React.ReactElement => {
   return (
     <ul className={classes.sideMenuList}>
       <li className={classes.sideMenuListItem}>
@@ -29,43 +30,49 @@ const SideMenu: React.FC<SideMenuProps> = ({ classes }): React.ReactElement => {
       <li className={classes.sideMenuListItem}>
         <div className={classes.listItemContent}>
           <SearchIcon className={classes.sideMenuListItemIcon} />
-
-          <Typography className={classes.sideMenuListItemLabel}>Search</Typography>
+          <Hidden smDown>
+            <Typography className={classes.sideMenuListItemLabel}>Search</Typography>
+          </Hidden>
         </div>
       </li>
       <li className={classes.sideMenuListItem}>
         <div className={classes.listItemContent}>
           <NotificationsIcon className={classes.sideMenuListItemIcon} />
-
-          <Typography className={classes.sideMenuListItemLabel}>Notifications</Typography>
+          <Hidden smDown>
+            <Typography className={classes.sideMenuListItemLabel}>Notifications</Typography>
+          </Hidden>
         </div>
       </li>
       <li className={classes.sideMenuListItem}>
         <div className={classes.listItemContent}>
           <MessageIcon className={classes.sideMenuListItemIcon} />
-
-          <Typography className={classes.sideMenuListItemLabel}>Messages</Typography>
+          <Hidden smDown>
+            <Typography className={classes.sideMenuListItemLabel}>Messages</Typography>
+          </Hidden>
         </div>
       </li>
       <li className={classes.sideMenuListItem}>
         <div className={classes.listItemContent}>
           <BookmarkIcon className={classes.sideMenuListItemIcon} />
-
-          <Typography className={classes.sideMenuListItemLabel}>Bookmarks</Typography>
+          <Hidden smDown>
+            <Typography className={classes.sideMenuListItemLabel}>Bookmarks</Typography>
+          </Hidden>
         </div>
       </li>
       <li className={classes.sideMenuListItem}>
         <div className={classes.listItemContent}>
           <ListIcon className={classes.sideMenuListItemIcon} />
-
-          <Typography className={classes.sideMenuListItemLabel}>List</Typography>
+          <Hidden smDown>
+            <Typography className={classes.sideMenuListItemLabel}>List</Typography>
+          </Hidden>
         </div>
       </li>
       <li className={classes.sideMenuListItem}>
         <div className={classes.listItemContent}>
           <PersonIcon className={classes.sideMenuListItemIcon} />
-
-          <Typography className={classes.sideMenuListItemLabel}>Profile</Typography>
+          <Hidden smDown>
+            <Typography className={classes.sideMenuListItemLabel}>Profile</Typography>
+          </Hidden>
         </div>
       </li>
       <li className={classes.sideMenuListItem}>
@@ -74,11 +81,12 @@ const SideMenu: React.FC<SideMenuProps> = ({ classes }): React.ReactElement => {
           variant="contained"
           color="primary"
           fullWidth>
-          Tweet
+          <Hidden smDown>Tweet</Hidden>
+          <Hidden mdUp>
+            <CreateIcon />
+          </Hidden>
         </Button>
       </li>
     </ul>
   )
 }
-
-export default SideMenu
