@@ -7,7 +7,7 @@ import { Close as CloseIcon } from '@material-ui/icons'
 import signInStyles from 'pages/SignIn/styles'
 
 interface IProps {
-  title: string
+  title?: string
   children: React.ReactNode
   classes?: ReturnType<typeof signInStyles>
   visible?: boolean

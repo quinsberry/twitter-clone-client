@@ -1,7 +1,7 @@
 import React from 'react'
 import cn from 'classnames'
 
-import { Grid, Paper, IconButton, Typography, Avatar } from '@material-ui/core'
+import { Paper, IconButton, Typography, Avatar } from '@material-ui/core'
 import {
   ChatBubbleOutlineOutlined as CommentIcon,
   RepeatOutlined as RepostIcon,

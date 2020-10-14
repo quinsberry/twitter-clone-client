@@ -1,6 +1,10 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { SearchInput } from 'components/common'
+import { fetchTweets } from 'store/ducks/tweets/actionCreators'
+import { selectIsTweetsLoading, selectTweetsItems } from 'store/ducks/tweets/selectors'
+
+import { SearchTextField } from 'components/common'
 import { Tweet, SideMenu, AddTweetForm } from 'components'
 
 import {
@@ -16,6 +20,7 @@ import {
   ListItemText,
   ListItemAvatar,
   Divider,
+  CircularProgress,
 } from '@material-ui/core'
 
 import { useHomeStyles } from './styles'
@@ -23,11 +28,19 @@ import { Search as SearchIcon, PersonAdd as PersonAddIcon } from '@material-ui/i
 
 export const Home = (): React.ReactElement => {
   const classes = useHomeStyles()
+  const dispatch = useDispatch()
+
+  const tweets = useSelector(selectTweetsItems)
+  const isLoading = useSelector(selectIsTweetsLoading)
+
+  React.useEffect(() => {
+    dispatch(fetchTweets())
+  }, [dispatch])
   return (
     <Container maxWidth="lg" className={classes.wrapper}>
       <Grid container spacing={3}>
         <Grid sm={1} md={3} item>
-          <SideMenu classes={classes} />
+          <SideMenu />
         </Grid>
         <Grid sm={8} md={6} item>
           <Paper variant="outlined" className={classes.tweetsWrapper}>
@@ -35,30 +48,23 @@ export const Home = (): React.ReactElement => {
               <Typography variant="h6">Home</Typography>
             </Paper>
             <Paper>
-              <AddTweetForm classes={classes} />
+              <AddTweetForm padding={20} />
               <div className={classes.addFormBottomLine} />
             </Paper>
-            {[
-              ...new Array(20).fill(
-                <Tweet
-                  classes={classes}
-                  user={{
-                    username: '@quinsberry',
-                    fullname: 'quinsberry',
-                    avatarUrl:
-                      'https://images.unsplash.com/photo-1589329482108-e414c7c6b8c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
-                  }}
-                  text={
-                    'Вслед за Москвой рекомендации по самоизоляции выдвинуло Подмосковье. Пока они касаются только жителей старше 65 лет и имеющих хронические заболевания. Кроме того, предприятиям порекомендовали вернуть на «дистанционку» как можно больше сотрудников'
-                  }
-                />,
-              ),
-            ]}
+            {isLoading ? (
+              <div className={classes.tweetsCentered}>
+                <CircularProgress />
+              </div>
+            ) : (
+              tweets.map((tweet) => (
+                <Tweet key={tweet._id} classes={classes} user={tweet.user} text={tweet.text} />
+              ))
+            )}
           </Paper>
         </Grid>
         <Grid sm={3} md={3} item>
           <div className={classes.rightSide}>
-            <SearchInput
+            <SearchTextField
               variant="outlined"
               placeholder="Search in Tweeter"
               InputProps={{

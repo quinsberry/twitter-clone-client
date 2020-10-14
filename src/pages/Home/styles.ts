@@ -5,47 +5,6 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
   wrapper: {
     height: '100vh',
   },
-  sideMenuList: {
-    listStyle: 'none',
-    maxWidth: 230,
-    padding: 0,
-    margin: 0,
-  },
-  sideMenuListItem: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  sideMenuTweetButton: {
-    padding: theme.spacing(3),
-    marginTop: theme.spacing(3),
-  },
-  listItemContent: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    padding: '0 20px 0 15px',
-    margin: '7px 0',
-    transition: '.1s ease-out',
-    borderRadius: 30,
-    height: 46,
-    cursor: 'pointer',
-
-    '&:hover': {
-      background: 'rgba(29, 161, 242, 0.1)',
-      color: theme.palette.primary.main,
-    },
-  },
-  sideMenuListItemLabel: {
-    fontWeight: 600,
-    fontSize: 20,
-    lineHeight: '25px',
-    marginLeft: 10,
-  },
-  sideMenuListItemIcon: {
-    fontSize: 26,
-  },
-  logoIcon: {
-    fontSize: 33,
-  },
   tweetsWrapper: {
     borderRadius: 0,
     height: '100%',
@@ -90,9 +49,9 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
     color: grey[500],
   },
   rightSide: {
-    paddingTop: 20,
-    pasition: 'sticky',
+    position: 'sticky',
     top: 0,
+    paddingTop: 20,
   },
   rightSideBlock: {
     backgroundColor: '#f5f8fa',
@@ -128,48 +87,12 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
       backgroundColor: '#edf3f6',
     },
   },
-  addForm: {
-    display: 'flex',
-    padding: 20,
-  },
-  addFormBody: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-  },
-  addFormBottom: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  addFormBottomActions: {
-    marginTop: 10,
-    paddingLeft: 70,
-  },
-  addFormTextarea: {
-    width: '100%',
-    border: 0,
-    fontSize: 20,
-    outline: 'none',
-    fontFamily: 'inherit',
-    resize: 'none',
-    marginBottom: 20,
-  },
   addFormBottomLine: {
     height: 12,
     backgroundColor: '#e6ecf0',
   },
-  addFormCircleProgress: {
-    position: 'relative',
-    width: 20,
-    height: 20,
-    margin: '0 10px',
-    '& .MuiCircularProgress-root': {
-      position: 'absolute',
-    },
-  },
-  addFormBottomRight: {
-    display: 'flex',
-    alignItems: 'center',
+  tweetsCentered: {
+    marginTop: 50,
+    textAlign: 'center',
   },
 }))

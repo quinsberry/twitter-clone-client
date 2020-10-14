@@ -9,7 +9,6 @@ import {
   Search as SearchIcon,
   PeopleOutline as PeopleIcon,
   ModeCommentOutlined as MessageIcon,
-  Close as CloseIcon,
 } from '@material-ui/icons'
 
 import signInStyles from './styles'
