@@ -1,31 +1,34 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { fetchTweets } from 'store/ducks/tweets/actionCreators'
-import { selectIsTweetsLoading, selectTweetsItems } from 'store/ducks/tweets/selectors'
+import { fetchTweets } from 'store/tweets/actionCreators'
+import { fetchTags } from 'store/tags/actionCreators'
+import { selectIsTweetsLoading, selectTweetsItems } from 'store/tweets/selectors'
 
-import { SearchTextField } from 'components/common'
-import { Tweet, SideMenu, AddTweetForm } from 'components'
+import { BackButton, SearchTextField } from 'components/common'
+import { Tweet, SideMenu, AddTweetForm, Tags } from 'components'
 
-import {
-  Container,
-  Grid,
-  Paper,
-  Typography,
-  Avatar,
-  Button,
-  InputAdornment,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemAvatar,
-  Divider,
-  CircularProgress,
-} from '@material-ui/core'
+import { FullTweet } from './components/FullTweet'
+
+import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
+import Avatar from '@material-ui/core/Avatar'
+import Button from '@material-ui/core/Button'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import ListItemAvatar from '@material-ui/core/ListItemAvatar'
+import Divider from '@material-ui/core/Divider'
+import CircularProgress from '@material-ui/core/CircularProgress'
+
+import SearchIcon from '@material-ui/icons/Search'
+import PersonAddIcon from '@material-ui/icons/PersonAdd'
 
 import { useHomeStyles } from './styles'
-import { Search as SearchIcon, PersonAdd as PersonAddIcon } from '@material-ui/icons'
-
 export const Home = (): React.ReactElement => {
   const classes = useHomeStyles()
   const dispatch = useDispatch()
@@ -35,6 +38,7 @@ export const Home = (): React.ReactElement => {
 
   React.useEffect(() => {
     dispatch(fetchTweets())
+    dispatch(fetchTags())
   }, [dispatch])
   return (
     <Container maxWidth="lg" className={classes.wrapper}>
@@ -45,21 +49,33 @@ export const Home = (): React.ReactElement => {
         <Grid sm={8} md={6} item>
           <Paper variant="outlined" className={classes.tweetsWrapper}>
             <Paper variant="outlined" className={classes.tweetsHeader}>
-              <Typography variant="h6">Home</Typography>
+              <Route path="/home/:any">
+                <BackButton marginRight={20} />
+              </Route>
+              <Route path={['/home', '/home/search']} exact>
+                <Typography variant="h6">Home</Typography>
+              </Route>
+              <Route path="/home/tweet">
+                <Typography variant="h6">Tweet</Typography>
+              </Route>
             </Paper>
-            <Paper>
-              <AddTweetForm padding={20} />
-              <div className={classes.addFormBottomLine} />
-            </Paper>
-            {isLoading ? (
-              <div className={classes.tweetsCentered}>
-                <CircularProgress />
-              </div>
-            ) : (
-              tweets.map((tweet) => (
-                <Tweet key={tweet._id} classes={classes} user={tweet.user} text={tweet.text} />
-              ))
-            )}
+            <Route path={['/home', '/home/search']} exact>
+              <Paper>
+                <AddTweetForm padding={20} />
+                <div className={classes.addFormBottomLine} />
+              </Paper>
+            </Route>
+            <Route path="/home" exact>
+              {isLoading ? (
+                <div className={classes.tweetsCentered}>
+                  <CircularProgress />
+                </div>
+              ) : (
+                tweets.map((tweet) => <Tweet key={tweet._id} classes={classes} {...tweet} />)
+              )}
+            </Route>
+
+            <Route path="/home/tweet/:id" component={FullTweet} exact />
           </Paper>
         </Grid>
         <Grid sm={3} md={3} item>
@@ -76,46 +92,7 @@ export const Home = (): React.ReactElement => {
               }}
               fullWidth
             />
-            <Paper className={classes.rightSideBlock}>
-              <Paper className={classes.rightSideBlockHeader} variant="outlined">
-                <b>Trends for you</b>
-              </Paper>
-              <List>
-                <ListItem className={classes.rightSideBlockItem}>
-                  <ListItemText
-                    primary="Warsaw"
-                    secondary={
-                      <Typography component="span" variant="body2">
-                        Tweets: 3 331
-                      </Typography>
-                    }
-                  />
-                </ListItem>
-                <Divider component="li" />
-                <ListItem className={classes.rightSideBlockItem}>
-                  <ListItemText
-                    primary="Warsaw"
-                    secondary={
-                      <Typography component="span" variant="body2">
-                        Tweets: 3 331
-                      </Typography>
-                    }
-                  />
-                </ListItem>
-                <Divider component="li" />
-                <ListItem className={classes.rightSideBlockItem}>
-                  <ListItemText
-                    primary="Warsaw"
-                    secondary={
-                      <Typography component="span" variant="body2">
-                        Tweets: 3 331
-                      </Typography>
-                    }
-                  />
-                </ListItem>
-                <Divider component="li" />
-              </List>
-            </Paper>
+            <Tags classes={classes} />
             <Paper className={classes.rightSideBlock}>
               <Paper className={classes.rightSideBlockHeader} variant="outlined">
                 <b>Who to follow</b>

@@ -16,6 +16,7 @@ import {
 import { useSideMenuStyles } from './styles'
 import { ModalBlock } from '../'
 import { AddTweetForm } from 'components/AddTweetForm/AddTweetForm'
+import { Link } from 'react-router-dom'
 
 interface SideMenuProps {}
 
@@ -35,7 +36,9 @@ export const SideMenu: React.FC<SideMenuProps> = (): React.ReactElement => {
     <ul className={classes.sideMenuList}>
       <li className={classes.sideMenuListItem}>
         <IconButton color="primary">
-          <TwitterIcon className={cn(classes.sideMenuListItemIcon, classes.logoIcon)} />
+          <Link to="/home">
+            <TwitterIcon className={cn(classes.sideMenuListItemIcon, classes.logoIcon)} />
+          </Link>
         </IconButton>
       </li>
       <li className={classes.sideMenuListItem}>

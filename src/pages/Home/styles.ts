@@ -12,6 +12,8 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
     borderBottom: 0,
   },
   tweetsHeader: {
+    display: 'flex',
+    alignItems: 'center',
     position: 'sticky',
     borderLeft: 0,
     borderRight: 0,
@@ -24,6 +26,7 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
   },
   tweet: {
     display: 'flex',
+    alignItems: 'flex-start',
     paddingTop: 15,
     paddingLeft: 20,
     transition: '.1s',
