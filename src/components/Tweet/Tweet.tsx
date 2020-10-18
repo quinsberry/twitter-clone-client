@@ -1,16 +1,18 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import cn from 'classnames'
 
-import { Paper, IconButton, Typography, Avatar } from '@material-ui/core'
-import {
-  ChatBubbleOutlineOutlined as CommentIcon,
-  RepeatOutlined as RepostIcon,
-  FavoriteBorderOutlined as LikeIcon,
-  SaveAltOutlined as ShareIcon,
-} from '@material-ui/icons'
+import Paper from '@material-ui/core/Paper'
+import IconButton from '@material-ui/core/IconButton'
+import Typography from '@material-ui/core/Typography'
+import Avatar from '@material-ui/core/Avatar'
+
+import CommentIcon from '@material-ui/icons/ChatBubbleOutlineOutlined'
+import RepostIcon from '@material-ui/icons/RepeatOutlined'
+import LikeIcon from '@material-ui/icons/FavoriteBorderOutlined'
+import ShareIcon from '@material-ui/icons/SaveAltOutlined'
 
 import { useHomeStyles } from 'pages/Home/styles'
-import { Link } from 'react-router-dom'
 
 interface TweetProps {
   _id: string
@@ -38,7 +40,7 @@ export const Tweet: React.FC<TweetProps> = ({ _id, text, classes, user }): React
             <span className={classes.tweetUserName}> - </span>
             <span className={classes.tweetUserName}>1 h</span>
           </Typography>
-          <Typography variant="body1" gutterBottom>
+          <Typography className={classes.tweetText} variant="body1" gutterBottom>
             {text}
           </Typography>
           <div className={classes.tweetFooter}>

@@ -35,10 +35,20 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
       backgroundColor: 'rgb(245,248,250)',
     },
   },
+  fullTweet: {
+    flexDirection: 'column',
+  },
+  tweetText: {
+    wordBreak: 'break-word',
+  },
   tweetAvatar: {
     width: theme.spacing(5),
     height: theme.spacing(5),
     marginRight: 10,
+  },
+  fullTweetAvatar: {
+    width: theme.spacing(6),
+    height: theme.spacing(6),
   },
   tweetFooter: {
     position: 'relative',

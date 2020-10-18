@@ -15,6 +15,9 @@ const theme = createMuiTheme({
       'Helvetice Neue',
       'sans-serif',
     ],
+    body1: {
+      lineHeight: '20px',
+    },
   },
   palette: {
     primary: {

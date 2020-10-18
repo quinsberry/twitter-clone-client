@@ -1,0 +1,84 @@
+{
+  "tweets": [
+    {
+      "id": 1,
+      "_id": "5f625ff65237689d962bc96f",
+      "text": "Nulla incididunt magna officia laborum excepteur occaecat aliquip tempor fugiat laboris. Voluptate occaecat do voluptate laborum deserunt do ad elit consequat deserunt sunt commodo cupidatat. Sint ea exercitation duis ipsum aute tempor exercitation sunt sint anim. Dolore aliquip adipisicing proident ea amet consequat culpa elit. Nulla commodo exercitation est dolor veniam officia esse eu nulla.",
+      "user": {
+        "fullname": "Dawson Mathews",
+        "username": "lara",
+        "avatarUrl": "https://source.unsplash.com/random/100x100?2"
+      }
+    },
+    {
+      "id": 2,
+      "_id": "5f625ff6adc4f5a905596a37",
+      "text": "Laboris deserunt aute non nostrud eu tempor. Lorem ad proident et enim incididunt et irure excepteur consectetur aliquip cupidatat. Lorem aute tempor Lorem reprehenderit tempor minim id ad pariatur officia ut labore eu anim. Laborum enim veniam deserunt Lorem Lorem culpa. Esse ex proident reprehenderit deserunt pariatur reprehenderit.",
+      "user": {
+        "fullname": "Hebert Morrison",
+        "username": "kristen",
+        "avatarUrl": "https://source.unsplash.com/random/100x100?4"
+      }
+    },
+    {
+      "_id": "56zg1n5j15s",
+      "text": "Hi there!",
+      "user": {
+        "fullname": "Данила Поперечный",
+        "username": "Spoontamer",
+        "avatarUrl": "https://pbs.twimg.com/profile_images/993557686921957377/8Xfvwgpq_400x400.jpg"
+      },
+      "id": 3
+    },
+    {
+      "_id": "zihzclhrryo",
+      "text": "asd",
+      "user": {
+        "fullname": "Данила Поперечный",
+        "username": "Spoontamer",
+        "avatarUrl": "https://pbs.twimg.com/profile_images/993557686921957377/8Xfvwgpq_400x400.jpg"
+      },
+      "id": 4
+    }
+  ],
+  "themes": [
+    {
+      "_id": "asd12dq12efw8sduj1n2di1n19sd",
+      "name": "Крыма",
+      "count": 9834
+    },
+    {
+      "_id": "asd12dq12e1w8sduj1n2di1n19s1",
+      "name": "Молодец",
+      "count": 1323
+    },
+    {
+      "_id": "asd12dq12e1w8sduj1n2di1g39sd",
+      "name": "Боже",
+      "count": 899
+    },
+    {
+      "_id": "asd12dq12e1w8sow91n2di1n19sd",
+      "name": "#FridayLivestream",
+      "count": 312
+    }
+  ],
+  "users": [
+    {
+      "fullname": "Hewitt Nelson",
+      "username": "matthews",
+      "avatarUrl": "https://source.unsplash.com/random/100x100?5"
+    },
+    {
+      "fullname": "Helene Wolfe",
+      "username": "castaneda",
+      "avatarUrl": "https://source.unsplash.com/random/100x100?4"
+    }
+  ],
+  "user": {
+    "_id": "asd12dq12e1w8sduj1n2di1n19sd",
+    "fullname": "Jenya Kolesnyk",
+    "username": "quinsberry",
+    "avatarUrl": "https://pbs.twimg.com/profile_images/580467843491356672/R5tjvGeo_400x400.jpg"
+  }
+}
