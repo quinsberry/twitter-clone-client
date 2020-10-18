@@ -110,7 +110,6 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
             </div>
           </div>
           {addFormState === LoadingState.ERROR && (
-            //@ts-ignore
             <Alert severity="error">{'We have an error with adding tweet :('}</Alert>
           )}
         </div>
