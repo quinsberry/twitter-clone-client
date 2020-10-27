@@ -96,6 +96,16 @@ const theme = createMuiTheme({
         },
       },
     },
+    MuiIconButton: {
+      colorSecondary: {
+        color: 'rgba(0, 0, 0, 0.54)',
+        transition: '.1s ease-in-out',
+
+        '&:hover': {
+          color: 'rgb(29, 161, 243)',
+        },
+      },
+    },
   },
 })
 

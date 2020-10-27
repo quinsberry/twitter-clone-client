@@ -2,6 +2,7 @@ import React from 'react'
 import cn from 'classnames'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import format from 'date-fns/format'
 
 import { fetchTweetData, setTweetData } from 'store/tweet/actionCreators'
 import { selectIsTweetLoading, selectTweetData } from 'store/tweet/selectors'
@@ -18,6 +19,7 @@ import LikeIcon from '@material-ui/icons/FavoriteBorderOutlined'
 import ShareIcon from '@material-ui/icons/SaveAltOutlined'
 
 import { useHomeStyles } from '../styles'
+import { formatDate } from '@utils/formatDate'
 
 interface FullTweetProps {}
 export const FullTweet: React.FC<FullTweetProps> = (): React.ReactElement | null => {
@@ -50,6 +52,7 @@ export const FullTweet: React.FC<FullTweetProps> = (): React.ReactElement | null
   const {
     user: { fullname, username, avatarUrl },
     text,
+    createdAt
   } = tweetData
 
   return (
@@ -63,40 +66,42 @@ export const FullTweet: React.FC<FullTweetProps> = (): React.ReactElement | null
           src={avatarUrl}
         />
         <div>
-          <Typography style={{ marginBottom: -1 }}>
+          <Typography style={{ marginBottom: 4 }}>
             <b>{fullname}</b>
           </Typography>
           <Typography>
             <span className={classes.tweetUserName}>@{username}</span>
-            <span className={classes.tweetUserName}> - </span>
-            <span className={classes.tweetUserName}>1 h</span>
           </Typography>
         </div>
       </div>
-      <Typography style={{ fontSize: 23 }} className={classes.tweetText} variant="h5" gutterBottom>
+      <Typography style={{ fontSize: 23 }} className={classes.tweetText} variant="h5">
         {text}
       </Typography>
-      <div className={classes.tweetFooter}>
+      <Typography className={classes.tweetUserName} style={{padding: '15px 0', width: '100%', borderBottom: '1px solid #f1f1f1', fontSize: 15}}>
+        <span className={classes.tweetUserName}>{format(new Date(createdAt), 'h:mm a')} · </span>
+  <span className={classes.tweetUserName}>{format(new Date(createdAt), 'MMM e, u')}</span>
+      </Typography>
+      <div className={classes.tweetFooter} style={{width: '100%', margin: 'auto'}}>
         <div>
           <IconButton color="primary">
-            <CommentIcon style={{ fontSize: 18 }} />
+            <CommentIcon style={{ fontSize: 20 }} />
           </IconButton>
           <span>1</span>
         </div>
         <div>
           <IconButton color="primary">
-            <RepostIcon style={{ fontSize: 18 }} />
+            <RepostIcon style={{ fontSize: 20 }} />
           </IconButton>
         </div>
         <div>
           <IconButton color="primary">
-            <LikeIcon style={{ fontSize: 18 }} />
+            <LikeIcon style={{ fontSize: 20 }} />
           </IconButton>
           <span>1</span>
         </div>
         <div>
           <IconButton color="primary">
-            <ShareIcon style={{ fontSize: 18 }} />
+            <ShareIcon style={{ fontSize: 20 }} />
           </IconButton>
         </div>
       </div>

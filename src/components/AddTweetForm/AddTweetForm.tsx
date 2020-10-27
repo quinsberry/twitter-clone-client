@@ -42,6 +42,12 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
     }
   }
 
+  const handleSubmit = (e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
+    if (e.key === 'Enter' && e.ctrlKey) {
+      handleClickAddTweet()
+    }
+  }
+
   const handleClickAddTweet = (): void => {
     dispatch(fetchAddTweet(text))
     setText('')
@@ -62,6 +68,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
             className={classes.addFormTextarea}
             placeholder="What's happening?"
             rowsMax={maxRows}
+            onKeyDown={handleSubmit}
           />
           <div className={classes.addFormBottom}>
             <div className={cn(classes.addFormFooter)}>
