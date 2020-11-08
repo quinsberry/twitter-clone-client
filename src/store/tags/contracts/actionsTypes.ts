@@ -1,5 +1,6 @@
 import { Action } from 'redux'
-import { LoadingState, TagsState } from './state'
+import { LoadingStatus } from 'store/types'
+import { TagsState } from './state'
 
 export enum TagsActionsType {
   SET_TAGS = 'tags/SET_TAGS',
@@ -12,16 +13,13 @@ export interface SetTagsActionInterface extends Action<TagsActionsType> {
   payload: TagsState['items']
 }
 
-export interface SetTagsLoadingStateInterface extends Action<TagsActionsType> {
+export interface SetTagsLoadingStatusInterface extends Action<TagsActionsType> {
   type: TagsActionsType.SET_LOADING_STATE
-  payload: LoadingState
+  payload: LoadingStatus
 }
 
 export interface FetchTagsActionInterface extends Action<TagsActionsType> {
   type: TagsActionsType.FETCH_TAGS
 }
 
-export type TagsActions =
-  | SetTagsActionInterface
-  | SetTagsLoadingStateInterface
-  | FetchTagsActionInterface
+export type TagsActions = SetTagsActionInterface | SetTagsLoadingStatusInterface | FetchTagsActionInterface

@@ -4,12 +4,12 @@ import { Dialog, DialogTitle, DialogContent, IconButton } from '@material-ui/cor
 
 import { Close as CloseIcon } from '@material-ui/icons'
 
-import signInStyles from 'pages/SignIn/styles'
+import { useSignInPageStyles } from 'pages/SignIn/styles'
 
 interface IProps {
   title?: string
   children: React.ReactNode
-  classes?: ReturnType<typeof signInStyles>
+  classes?: ReturnType<typeof useSignInPageStyles>
   visible?: boolean
   onClose: () => void
 }

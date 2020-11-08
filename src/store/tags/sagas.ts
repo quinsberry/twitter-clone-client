@@ -1,15 +1,15 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { TagsApi } from 'services/api/tagsApi'
-import { setTags, setTagsLoadingState } from './actionCreators'
+import { setTags, setTagsLoadingStatus } from './actionCreators'
 import { TagsActionsType } from './contracts/actionsTypes'
-import { LoadingState } from './contracts/state'
+import { LoadingStatus } from 'store/types'
 
 export function* fetchTagsRequest() {
   try {
     const items = yield call(TagsApi.fetchTags)
     yield put(setTags(items))
   } catch (err) {
-    yield put(setTagsLoadingState(LoadingState.ERROR))
+    yield put(setTagsLoadingStatus(LoadingStatus.ERROR))
   }
 }
 

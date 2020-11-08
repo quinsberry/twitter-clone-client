@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
-import { ModalBlock } from 'components'
+import { useNotificationOutput } from '@hooks/useNotifications'
+import { LoginModal, SignUpModal } from './components'
 
-import { Button, Typography, FormControl, FormGroup, TextField } from '@material-ui/core'
-
+import { Button, Typography } from '@material-ui/core'
 import {
   Twitter as TwitterIcon,
   Search as SearchIcon,
@@ -11,19 +11,23 @@ import {
   ModeCommentOutlined as MessageIcon,
 } from '@material-ui/icons'
 
-import signInStyles from './styles'
+import { useSignInPageStyles } from './styles'
 
-export const SignIn: React.FC = (): React.ReactElement => {
-  const classes = signInStyles()
+interface SignInPageProps {
+  useNotificationObj: useNotificationOutput
+}
+export const SignIn: React.FC<SignInPageProps> = ({ useNotificationObj }): React.ReactElement => {
+  const classes = useSignInPageStyles()
+  const { openNotification } = useNotificationObj
 
-  const [visibleModal, setVisibleModal] = useState<'signUp' | 'logIn'>()
+  const [visibleModal, setVisibleModal] = useState<'signUp' | 'signIn'>()
 
   const handleOpenSignUp = (): void => {
     setVisibleModal('signUp')
   }
 
   const handleOpenLogIn = (): void => {
-    setVisibleModal('logIn')
+    setVisibleModal('signIn')
   }
 
   const handleCloseModal = (): void => {
@@ -83,81 +87,8 @@ export const SignIn: React.FC = (): React.ReactElement => {
         <span>© Twitter, Inc., 2020.</span>
       </footer>
 
-      <ModalBlock
-        title={'Log in to Twitter'}
-        visible={visibleModal === 'logIn'}
-        onClose={handleCloseModal}>
-        <FormControl component="fieldset" fullWidth>
-          <FormGroup aria-label="position" row>
-            <TextField
-              className={classes.loginSideField}
-              autoFocus
-              id="email"
-              label="Email"
-              type="email"
-              InputLabelProps={{ shrink: true }}
-              variant="filled"
-              fullWidth
-            />
-            <TextField
-              className={classes.loginSideField}
-              autoFocus
-              id="password"
-              label="Password"
-              type="password"
-              InputLabelProps={{ shrink: true }}
-              variant="filled"
-              fullWidth
-            />
-            <Button onClick={handleCloseModal} variant="contained" color="primary" fullWidth>
-              Log in
-            </Button>
-          </FormGroup>
-        </FormControl>
-      </ModalBlock>
-
-      <ModalBlock
-        title={'Create your account'}
-        visible={visibleModal === 'signUp'}
-        onClose={handleCloseModal}>
-        <FormControl component="fieldset" fullWidth>
-          <FormGroup aria-label="position" row>
-            <TextField
-              className={classes.signUpSideField}
-              autoFocus
-              id="name"
-              label="Name"
-              type="text"
-              InputLabelProps={{ shrink: true }}
-              variant="filled"
-              fullWidth
-            />
-            <TextField
-              className={classes.signUpSideField}
-              autoFocus
-              id="email"
-              label="Email"
-              type="email"
-              InputLabelProps={{ shrink: true }}
-              variant="filled"
-              fullWidth
-            />
-            <TextField
-              className={classes.signUpSideField}
-              autoFocus
-              id="password"
-              label="Password"
-              type="password"
-              InputLabelProps={{ shrink: true }}
-              variant="filled"
-              fullWidth
-            />
-            <Button onClick={handleCloseModal} variant="contained" color="primary" fullWidth>
-              Next
-            </Button>
-          </FormGroup>
-        </FormControl>
-      </ModalBlock>
+      <LoginModal open={visibleModal === 'signIn'} openNotification={openNotification} onClose={handleCloseModal} />
+      <SignUpModal open={visibleModal === 'signUp'} openNotification={openNotification} onClose={handleCloseModal} />
     </div>
   )
 }

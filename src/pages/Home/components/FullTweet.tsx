@@ -19,7 +19,6 @@ import LikeIcon from '@material-ui/icons/FavoriteBorderOutlined'
 import ShareIcon from '@material-ui/icons/SaveAltOutlined'
 
 import { useHomeStyles } from '../styles'
-import { formatDate } from '@utils/formatDate'
 
 interface FullTweetProps {}
 export const FullTweet: React.FC<FullTweetProps> = (): React.ReactElement | null => {
@@ -52,13 +51,11 @@ export const FullTweet: React.FC<FullTweetProps> = (): React.ReactElement | null
   const {
     user: { fullname, username, avatarUrl },
     text,
-    createdAt
+    createdAt,
   } = tweetData
 
   return (
-    <Paper
-      variant="outlined"
-      className={cn(classes.tweetsHeader, classes.tweet, classes.fullTweet)}>
+    <Paper variant="outlined" className={cn(classes.tweetsHeader, classes.tweet, classes.fullTweet)}>
       <div style={{ display: 'flex', alignItems: 'center', paddingBottom: 10 }}>
         <Avatar
           className={cn(classes.tweetAvatar, classes.fullTweetAvatar)}
@@ -77,11 +74,13 @@ export const FullTweet: React.FC<FullTweetProps> = (): React.ReactElement | null
       <Typography style={{ fontSize: 23 }} className={classes.tweetText} variant="h5">
         {text}
       </Typography>
-      <Typography className={classes.tweetUserName} style={{padding: '15px 0', width: '100%', borderBottom: '1px solid #f1f1f1', fontSize: 15}}>
+      <Typography
+        className={classes.tweetUserName}
+        style={{ padding: '15px 0', width: '100%', borderBottom: '1px solid #f1f1f1', fontSize: 15 }}>
         <span className={classes.tweetUserName}>{format(new Date(createdAt), 'h:mm a')} · </span>
-  <span className={classes.tweetUserName}>{format(new Date(createdAt), 'MMM e, u')}</span>
+        <span className={classes.tweetUserName}>{format(new Date(createdAt), 'MMM e, u')}</span>
       </Typography>
-      <div className={classes.tweetFooter} style={{width: '100%', margin: 'auto'}}>
+      <div className={classes.tweetFooter} style={{ width: '100%', margin: 'auto' }}>
         <div>
           <IconButton color="primary">
             <CommentIcon style={{ fontSize: 20 }} />

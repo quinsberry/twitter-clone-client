@@ -4,7 +4,7 @@ import cn from 'classnames'
 
 import { fetchAddTweet } from 'store/tweets/actionCreators'
 import { selectAddFormState } from 'store/tweets/selectors'
-import { LoadingState } from 'store/tweets/contracts/state'
+import { LoadingStatus } from 'store/types'
 
 import Alert from '@material-ui/lab/Alert'
 
@@ -24,10 +24,7 @@ interface AddTweetFormProps {
 }
 
 const TWEET_MAX_LENGTH = 280
-export const AddTweetForm: React.FC<AddTweetFormProps> = ({
-  maxRows,
-  padding,
-}): React.ReactElement => {
+export const AddTweetForm: React.FC<AddTweetFormProps> = ({ maxRows, padding }): React.ReactElement => {
   const classes = useAddTweetFormStyles()
   const dispatch = useDispatch()
   const [text, setText] = React.useState('')
@@ -103,20 +100,14 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
               )}
               <Button
                 onClick={handleClickAddTweet}
-                disabled={
-                  addFormState === LoadingState.LOADING || !text || text.length > TWEET_MAX_LENGTH
-                }
+                disabled={addFormState === LoadingStatus.LOADING || !text || text.length > TWEET_MAX_LENGTH}
                 color="primary"
                 variant="contained">
-                {addFormState === LoadingState.LOADING ? (
-                  <CircularProgress color="inherit" size={18} />
-                ) : (
-                  'Tweet'
-                )}
+                {addFormState === LoadingStatus.LOADING ? <CircularProgress color="inherit" size={18} /> : 'Tweet'}
               </Button>
             </div>
           </div>
-          {addFormState === LoadingState.ERROR && (
+          {addFormState === LoadingStatus.ERROR && (
             <Alert severity="error">{'We have an error with adding tweet :('}</Alert>
           )}
         </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import cn from 'classnames'
 
 import Paper from '@material-ui/core/Paper'
@@ -13,7 +13,7 @@ import LikeIcon from '@material-ui/icons/FavoriteBorderOutlined'
 import ShareIcon from '@material-ui/icons/SaveAltOutlined'
 
 import { useHomeStyles } from 'pages/Home/styles'
-import { User } from 'store/tweets/contracts/state'
+import { User } from 'store/user/contracts/state'
 import { formatDate } from '@utils/formatDate'
 
 import Menu from '@material-ui/core/Menu'
@@ -28,13 +28,7 @@ interface TweetProps {
   user: User
 }
 
-export const Tweet: React.FC<TweetProps> = ({
-  _id,
-  text,
-  createdAt,
-  classes,
-  user,
-}): React.ReactElement => {
+export const Tweet: React.FC<TweetProps> = ({ _id, text, createdAt, classes, user }): React.ReactElement => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
 
@@ -59,14 +53,9 @@ export const Tweet: React.FC<TweetProps> = ({
   return (
     <div onClick={handleTweetClick}>
       <Paper variant="outlined" className={cn(classes.tweetsHeader, classes.tweet)}>
-        <Avatar
-          className={classes.tweetAvatar}
-          alt={`${user.fullname}'s avatar`}
-          src={user.avatarUrl}
-        />
+        <Avatar className={classes.tweetAvatar} alt={`${user.fullname}'s avatar`} src={user.avatarUrl} />
         <div style={{ width: '100%' }}>
-          <Typography
-            style={{ paddingBottom: 5, display: 'flex', justifyContent: 'space-between' }}>
+          <Typography style={{ paddingBottom: 5, display: 'flex', justifyContent: 'space-between' }}>
             <div>
               <b style={{ marginRight: 4 }}>{user.fullname}</b>
               <span className={classes.tweetUserName}>@{user.username}</span>
@@ -83,12 +72,7 @@ export const Tweet: React.FC<TweetProps> = ({
                 onClick={handleMenuClick}>
                 <MoreVertIcon />
               </IconButton>
-              <Menu
-                id="long-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={open}
-                onClose={handleMenuClose}>
+              <Menu id="long-menu" anchorEl={anchorEl} keepMounted open={open} onClose={handleMenuClose}>
                 {options.map((option) => (
                   <MenuItem key={option} onClick={handleMenuClose}>
                     {option}

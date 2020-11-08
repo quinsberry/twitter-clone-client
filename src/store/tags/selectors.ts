@@ -1,15 +1,14 @@
 import { createSelector } from 'reselect'
 import { RootState } from 'store/store'
-import { LoadingState, TagsState } from './contracts/state'
+import { TagsState } from './contracts/state'
+import { LoadingStatus } from 'store/types'
 
 export const selectTags = (state: RootState): TagsState => state.tags
 
-export const selectLoadingState = (state: RootState): LoadingState => state.tags.loadingState
+export const selectLoadingStatus = (state: RootState): LoadingStatus => state.tags.LoadingStatus
 
-export const selectIsTagsLoading = (state: RootState): boolean =>
-  selectLoadingState(state) === LoadingState.LOADING
+export const selectIsTagsLoading = (state: RootState): boolean => selectLoadingStatus(state) === LoadingStatus.LOADING
 
-export const selectIsTagsLoaded = (state: RootState): boolean =>
-  selectLoadingState(state) === LoadingState.LOADED
+export const selectIsTagsLoaded = (state: RootState): boolean => selectLoadingStatus(state) === LoadingStatus.LOADED
 
 export const selectTagsItems = createSelector(selectTags, (tags) => tags.items)

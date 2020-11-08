@@ -1,19 +1,15 @@
-import { RootState } from "store/store";
-import { LoadingState, TweetsState } from "./contracts/state";
+import { RootState } from 'store/store'
+import { TweetsState } from './contracts/state'
+import { LoadingStatus } from 'store/types'
 
-export const selectTweets = (state: RootState): TweetsState => state.tweets;
+export const selectTweets = (state: RootState): TweetsState => state.tweets
 
-export const selectLoadingState = (state: RootState): LoadingState =>
-  selectTweets(state).loadingState;
+export const selectLoadingStatus = (state: RootState): LoadingStatus => selectTweets(state).LoadingStatus
 
-export const selectAddFormState = (state: RootState): LoadingState =>
-  selectTweets(state).addFormState;
+export const selectAddFormState = (state: RootState): LoadingStatus => selectTweets(state).addFormState
 
-export const selectIsTweetsLoading = (state: RootState): boolean =>
-  selectLoadingState(state) === LoadingState.LOADING;
+export const selectIsTweetsLoading = (state: RootState): boolean => selectLoadingStatus(state) === LoadingStatus.LOADING
 
-export const selectIsTweetsLoaded = (state: RootState): boolean =>
-  selectLoadingState(state) === LoadingState.LOADED;
+export const selectIsTweetsLoaded = (state: RootState): boolean => selectLoadingStatus(state) === LoadingStatus.LOADED
 
-export const selectTweetsItems = (state: RootState) =>
-  selectTweets(state).items;
+export const selectTweetsItems = (state: RootState) => selectTweets(state).items
