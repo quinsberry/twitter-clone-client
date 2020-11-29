@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { UserActions } from 'store/user/actionCreators'
+import { selectUserStatus } from 'store/user/selectors'
 import { useNotificationOutput } from '@hooks/useNotifications'
+
 import { LoginModal, SignUpModal } from './components'
 
 import { Button, Typography } from '@material-ui/core'
@@ -12,12 +16,15 @@ import {
 } from '@material-ui/icons'
 
 import { useSignInPageStyles } from './styles'
+import { LoadingStatus } from 'store/types'
 
 interface SignInPageProps {
   useNotificationObj: useNotificationOutput
 }
 export const SignIn: React.FC<SignInPageProps> = ({ useNotificationObj }): React.ReactElement => {
   const classes = useSignInPageStyles()
+  const dispatch = useDispatch()
+  const loadingStatus = useSelector(selectUserStatus)
   const { openNotification } = useNotificationObj
 
   const [visibleModal, setVisibleModal] = useState<'signUp' | 'signIn'>()
@@ -32,6 +39,10 @@ export const SignIn: React.FC<SignInPageProps> = ({ useNotificationObj }): React
 
   const handleCloseModal = (): void => {
     setVisibleModal(undefined)
+
+    if (loadingStatus !== LoadingStatus.NEVER) {
+      dispatch(UserActions.setUserLoadingStatusDefault())
+    }
   }
 
   return (
@@ -87,8 +98,12 @@ export const SignIn: React.FC<SignInPageProps> = ({ useNotificationObj }): React
         <span>© Twitter, Inc., 2020.</span>
       </footer>
 
-      <LoginModal open={visibleModal === 'signIn'} openNotification={openNotification} onClose={handleCloseModal} />
-      <SignUpModal open={visibleModal === 'signUp'} openNotification={openNotification} onClose={handleCloseModal} />
+      {visibleModal === 'signIn' && (
+        <LoginModal open={visibleModal === 'signIn'} openNotification={openNotification} onClose={handleCloseModal} />
+      )}
+      {visibleModal === 'signUp' && (
+        <SignUpModal open={visibleModal === 'signUp'} openNotification={openNotification} onClose={handleCloseModal} />
+      )}
     </div>
   )
 }

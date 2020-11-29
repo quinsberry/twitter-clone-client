@@ -97,7 +97,12 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose, openNotif
               variant="filled"
               fullWidth
             />
-            <Button type="submit" variant="contained" color="primary" fullWidth>
+            <Button
+              disabled={loadingStatus === LoadingStatus.LOADING}
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth>
               Log in
             </Button>
           </FormGroup>

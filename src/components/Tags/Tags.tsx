@@ -8,10 +8,11 @@ import { Paper, Typography, List, ListItem, ListItemText, Divider } from '@mater
 import { useHomeStyles } from 'pages/Home/styles'
 
 interface TagsProps {
-  classes: ReturnType<typeof useHomeStyles>
+  classes?: ReturnType<typeof useHomeStyles>
 }
 
-export const Tags: React.FC<TagsProps> = ({ classes }): React.ReactElement | null => {
+export const Tags: React.FC<TagsProps> = (): React.ReactElement | null => {
+  const classes = useHomeStyles()
   const tags = useSelector(selectTagsItems)
   const isLoaded = useSelector(selectIsTagsLoaded)
 

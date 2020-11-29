@@ -32,6 +32,8 @@ export const Tweet: React.FC<TweetProps> = ({ _id, text, createdAt, classes, use
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
 
+  console.log('user: ', user)
+
   const history = useHistory()
 
   const handleTweetClick = (event: React.MouseEvent<HTMLDivElement>): void => {
@@ -55,7 +57,7 @@ export const Tweet: React.FC<TweetProps> = ({ _id, text, createdAt, classes, use
       <Paper variant="outlined" className={cn(classes.tweetsHeader, classes.tweet)}>
         <Avatar className={classes.tweetAvatar} alt={`${user.fullname}'s avatar`} src={user.avatarUrl} />
         <div style={{ width: '100%' }}>
-          <Typography style={{ paddingBottom: 5, display: 'flex', justifyContent: 'space-between' }}>
+          <div style={{ paddingBottom: 5, display: 'flex', justifyContent: 'space-between' }}>
             <div>
               <b style={{ marginRight: 4 }}>{user.fullname}</b>
               <span className={classes.tweetUserName}>@{user.username}</span>
@@ -80,7 +82,7 @@ export const Tweet: React.FC<TweetProps> = ({ _id, text, createdAt, classes, use
                 ))}
               </Menu>
             </div>
-          </Typography>
+          </div>
           <Typography className={classes.tweetText} variant="body1" gutterBottom>
             {text}
           </Typography>

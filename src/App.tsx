@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { Switch, Route, Redirect, useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { selectIsAuth } from 'store/user/selectors'
 import { AuthApi } from 'services/api/authApi'
 import { UserActions } from 'store/user/actionCreators'
 
@@ -14,8 +15,11 @@ import Slide from '@material-ui/core/Slide'
 
 function App() {
   const dispatch = useDispatch()
+  const history = useHistory()
   const useNotificationObj = useNotification()
   const { notificationState, notificationText, closeNotification, notificationType } = useNotificationObj
+
+  const isAuth = useSelector(selectIsAuth)
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -30,14 +34,18 @@ function App() {
     checkAuth()
   }, [])
 
-  // This effect close a preloader of page when app initialized
+  useEffect(() => {
+    if (isAuth) {
+      return history.push('/home')
+    }
+  }, [isAuth])
+
+  // This effect close page preloader when app had initialized
   useEffect(() => {
     const ele = document.getElementById('preloader')
     if (ele) {
-      // fade out
       ele?.classList.add('available')
       setTimeout(() => {
-        // remove from DOM
         if (ele) ele.outerHTML = ''
       }, 2000)
     }
@@ -46,11 +54,11 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <Route path="/signin" render={() => <SignIn useNotificationObj={useNotificationObj} />} />
+        <Route path="/signin" exact render={() => <SignIn useNotificationObj={useNotificationObj} />} />
         <Route path="/home" component={Home} />
         <Redirect to="/home" />
       </Switch>
-      /** Global notifications */
+
       <Snackbar
         open={notificationState}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
