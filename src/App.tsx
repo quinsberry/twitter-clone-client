@@ -7,7 +7,7 @@ import { AuthApi } from 'services/api/authApi'
 import { UserActions } from 'store/user/actionCreators'
 
 import { SignIn, Home } from 'pages'
-import { useNotification } from '@hooks/useNotifications'
+import { useNotification } from 'hooks/useNotifications'
 
 import Snackbar from '@material-ui/core/Snackbar'
 import Alert from '@material-ui/lab/Alert'

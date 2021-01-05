@@ -1,4 +1,4 @@
-import { axios } from '@core/axios'
+import { axios } from 'core/axios'
 
 import { LoginFormProps } from 'pages/SignIn/components/LoginModal'
 import { SignUpFormProps } from 'pages/SignIn/components/SignUpModal'

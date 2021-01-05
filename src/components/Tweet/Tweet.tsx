@@ -14,7 +14,7 @@ import ShareIcon from '@material-ui/icons/SaveAltOutlined'
 
 import { useHomeStyles } from 'pages/Home/styles'
 import { User } from 'store/user/contracts/state'
-import { formatDate } from '@utils/formatDate'
+import { formatDate } from 'utils/formatDate'
 
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'

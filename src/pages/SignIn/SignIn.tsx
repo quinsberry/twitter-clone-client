@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { UserActions } from 'store/user/actionCreators'
 import { selectUserStatus } from 'store/user/selectors'
-import { useNotificationOutput } from '@hooks/useNotifications'
+import { useNotificationOutput } from 'hooks/useNotifications'
 
 import { LoginModal, SignUpModal } from './components'
 

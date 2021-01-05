@@ -15,7 +15,7 @@ import Snackbar from '@material-ui/core/Snackbar'
 import Slide from '@material-ui/core/Slide'
 
 import { useSignInPageStyles } from 'pages/SignIn/styles'
-import { openNotificationType } from '@hooks/useNotifications'
+import { openNotificationType } from 'hooks/useNotifications'
 import { useDispatch, useSelector } from 'react-redux'
 import { UserActions } from 'store/user/actionCreators'
 import { selectUserStatus } from 'store/user/selectors'

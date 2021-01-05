@@ -1,4 +1,5 @@
-import { axios } from '@core/axios'
+import { axios } from 'core/axios'
+
 import { Tweet, TweetsState } from 'store/tweets/contracts/state'
 
 import { Response } from './apiTypes'
