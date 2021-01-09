@@ -5,7 +5,7 @@ import { User, UserState } from './contracts/state'
 
 const initialUserState: UserState = {
   data: {} as User,
-  status: LoadingStatus.NEVER,
+  status: LoadingStatus.LOADING,
 }
 
 export const userReducer = produce((draft: Draft<UserState>, action: UserActionsTypes) => {
@@ -19,6 +19,12 @@ export const userReducer = produce((draft: Draft<UserState>, action: UserActions
       break
     case 'user/FETCH_SIGN_UP':
       draft.status = LoadingStatus.LOADING
+      break
+    case 'user/INITIALIZATION':
+      draft.status = LoadingStatus.LOADING
+      break
+    case 'user/INITIALIZED':
+      draft.status = LoadingStatus.NEVER
       break
     case 'user/SET_LOADING_STATUS':
       draft.status = action.payload

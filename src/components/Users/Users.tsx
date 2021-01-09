@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 import { selectUsersData } from 'store/users/selectors'
 
-import { useHomeStyles } from 'pages/Home/styles'
+import { useUsersStyles } from './styles'
 
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
@@ -18,7 +18,7 @@ import Divider from '@material-ui/core/Divider'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
 
 export const Users = () => {
-  const classes = useHomeStyles()
+  const classes = useUsersStyles()
   const users = useSelector(selectUsersData)
 
   return (

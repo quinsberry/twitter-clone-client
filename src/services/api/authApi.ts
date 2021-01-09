@@ -6,15 +6,15 @@ import { User } from 'store/user/contracts/state'
 import { Response } from './apiTypes'
 
 export const AuthApi = {
-  async signIn(postData: LoginFormProps): Promise<User> {
+  async signIn(postData: LoginFormProps) {
     const { data } = await axios.post<Response<User>>('/auth/signin', postData)
     return data.data
   },
-  async signUp(postData: SignUpFormProps): Promise<User> {
+  async signUp(postData: SignUpFormProps) {
     const { data } = await axios.post<Response<User>>('/auth/signup', postData)
     return data.data
   },
-  async getMe(): Promise<User> {
+  async getMe() {
     const { data } = await axios.get<Response<User>>('/users/me')
     return data.data
   },

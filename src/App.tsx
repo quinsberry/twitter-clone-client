@@ -2,8 +2,7 @@ import React, { useEffect } from 'react'
 import { Switch, Route, Redirect, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { selectIsAuth } from 'store/user/selectors'
-import { AuthApi } from 'services/api/authApi'
+import { selectIsAuth, selectUserIsLoading } from 'store/user/selectors'
 import { UserActions } from 'store/user/actionCreators'
 
 import { SignIn, Home } from 'pages'
@@ -12,6 +11,7 @@ import { useNotification } from 'hooks/useNotifications'
 import Snackbar from '@material-ui/core/Snackbar'
 import Alert from '@material-ui/lab/Alert'
 import Slide from '@material-ui/core/Slide'
+import { Layout } from 'components/content'
 
 function App() {
   const dispatch = useDispatch()
@@ -20,33 +20,28 @@ function App() {
   const { notificationState, notificationText, closeNotification, notificationType } = useNotificationObj
 
   const isAuth = useSelector(selectIsAuth)
+  const isLoading = useSelector(selectUserIsLoading)
 
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const data = await AuthApi.getMe()
-        dispatch(UserActions.setUserData(data))
-      } catch (err) {
-        console.log(`>> ${err}`)
+    dispatch(UserActions.userInitialization())
+  }, [dispatch])
+
+  useEffect(() => {
+    if (!isLoading && !isAuth) {
+      return history.push('/signin')
+    } else {
+      if (!history.location.pathname.split('/').includes('home')) {
+        return history.push('/home')
       }
     }
-
-    checkAuth()
-  }, [])
+  }, [isAuth, isLoading, history])
 
   useEffect(() => {
-    if (isAuth) {
-      return history.push('/home')
-    }
-  }, [isAuth])
-
-  // This effect close page preloader when app had initialized
-  useEffect(() => {
-    const ele = document.getElementById('preloader')
-    if (ele) {
-      ele?.classList.add('available')
+    const el = document.getElementById('preloader')
+    if (el) {
+      el?.classList.add('available')
       setTimeout(() => {
-        if (ele) ele.outerHTML = ''
+        if (el) el.outerHTML = ''
       }, 2000)
     }
   }, [])
@@ -55,7 +50,15 @@ function App() {
     <div className="App">
       <Switch>
         <Route path="/signin" exact render={() => <SignIn useNotificationObj={useNotificationObj} />} />
-        <Route path="/home" component={Home} />
+
+        <Route
+          path="/home"
+          render={() => (
+            <Layout>
+              <Home />
+            </Layout>
+          )}
+        />
         <Redirect to="/home" />
       </Switch>
 

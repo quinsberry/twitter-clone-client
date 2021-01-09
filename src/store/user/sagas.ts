@@ -19,8 +19,21 @@ export function* fetchSignInRequest({ payload }: fetchSignInActionType) {
 
 export function* fetchSignUpRequest({ payload }: fetchSignUpActionType) {
   try {
-    const data: User = yield call(AuthApi.signUp, payload)
+    yield call(AuthApi.signUp, payload)
     yield put(UserActions.setUserDataLoadingStatus(LoadingStatus.LOADED))
+  } catch (err) {
+    yield put(UserActions.setUserDataLoadingStatus(LoadingStatus.ERROR))
+  }
+}
+
+export function* InitializationUserRequest() {
+  try {
+    const token = localStorage.getItem('token')
+    if (token) {
+      const data: User = yield call(AuthApi.getMe)
+      yield put(UserActions.setUserData(data))
+    }
+    yield put(UserActions.userInitialized())
   } catch (err) {
     yield put(UserActions.setUserDataLoadingStatus(LoadingStatus.ERROR))
   }
@@ -29,4 +42,5 @@ export function* fetchSignUpRequest({ payload }: fetchSignUpActionType) {
 export function* userSaga() {
   yield takeLatest('user/FETCH_SIGN_IN', fetchSignInRequest)
   yield takeLatest('user/FETCH_SIGN_UP', fetchSignUpRequest)
+  yield takeLatest('user/INITIALIZATION', InitializationUserRequest)
 }

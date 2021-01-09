@@ -65,7 +65,7 @@ export const SignUpModal: React.FC<SignUpModalProps> = ({ open, onClose, openNot
     if (loadingStatus === LoadingStatus.ERROR) {
       openNotification('An error occurred. Try again later', 'error')
     }
-  }, [loadingStatus])
+  }, [loadingStatus, openNotification, onClose])
 
   return (
     <ModalBlock title={'Create your account'} visible={open} onClose={onClose}>

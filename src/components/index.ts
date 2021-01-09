@@ -1,6 +1,7 @@
 export { ModalBlock } from './ModalBlock/ModalBlock'
 export { Tweet } from './Tweet/Tweet'
 export { SideMenu } from './SideMenu/SideMenu'
+export { RightMenu } from './RightMenu/RightMenu'
 export { AddTweetForm } from './AddTweetForm/AddTweetForm'
 export { Tags } from './Tags/Tags'
 export { Users } from './Users/Users'

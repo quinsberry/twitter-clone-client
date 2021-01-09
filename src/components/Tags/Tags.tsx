@@ -5,14 +5,14 @@ import { useSelector } from 'react-redux'
 import { selectIsTagsLoaded, selectTagsItems } from 'store/tags/selectors'
 
 import { Paper, Typography, List, ListItem, ListItemText, Divider } from '@material-ui/core'
-import { useHomeStyles } from 'pages/Home/styles'
+import { useTagsStyles } from './styles'
 
 interface TagsProps {
-  classes?: ReturnType<typeof useHomeStyles>
+  classes?: ReturnType<typeof useTagsStyles>
 }
 
 export const Tags: React.FC<TagsProps> = (): React.ReactElement | null => {
-  const classes = useHomeStyles()
+  const classes = useTagsStyles()
   const tags = useSelector(selectTagsItems)
   const isLoaded = useSelector(selectIsTagsLoaded)
 
